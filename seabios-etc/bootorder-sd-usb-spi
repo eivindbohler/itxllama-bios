@@ -1,0 +1,13 @@
+/pci@i0cf8/*@c/drive@0/disk@0
+
+/pci@i0cf8/usb@a,1/storage@1/*@0/*@0,0
+/pci@i0cf8/usb@a,1/usb-*@1
+/pci@i0cf8/usb@a,1/storage@2/*@0/*@0,0
+/pci@i0cf8/usb@a,1/usb-*@2
+
+/pci@i0cf8/usb@a,1/hub@1/usb-*@1
+/pci@i0cf8/usb@a,1/hub@1/usb-*@2
+/pci@i0cf8/usb@a,1/hub@1/usb-*@3
+/pci@i0cf8/usb@a,1/hub@1/usb-*@4
+
+/spidisk

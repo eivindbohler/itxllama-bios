@@ -1,0 +1,73 @@
+#! /bin/sh
+CBFSTOOL=coreboot/build/cbfstool
+ROMFILE=coreboot/build/coreboot.rom
+
+function cbfs_add {
+  filename=${1:?no filename}
+  filetype="raw"
+  targetname=`basename $filename`
+  compressflag="none"
+  # first argument is filename, skip it
+  OPTIND=2
+  while getopts "n:t:c:" opt;do
+    case $opt in
+      n)
+        #echo "target name="$OPTARG
+        targetname=$OPTARG
+        ;;
+      t)
+        #echo "type="$OPTARG
+        filetype=$OPTARG
+        ;;
+      c)
+        compressflag=$OPTARG
+        ;;
+      \?)
+        echo "Invalid argument"
+        exit 1
+        ;;
+    esac
+  done
+  if [ "$compressflag" == "none" ]; then
+    $CBFSTOOL $ROMFILE add -f $filename -n $targetname -t $filetype
+  else
+    $CBFSTOOL $ROMFILE add -f $filename -n $targetname -t $filetype -c $compressflag
+  fi
+}
+
+function cbfs_add_payload {
+  filename=${1:?no filename}
+  targetname=payload
+  compressflag=none
+  # first argument is filename, skip it
+  OPTIND=2
+  while getopts "n:c:" opt;do
+    case $opt in
+      n)
+        #echo "target name="$OPTARG
+        targetname=$OPTARG
+        ;;
+      c)
+        compressflag=$OPTARG
+        ;;
+      \?)
+        echo "Invalid argument"
+        exit 1
+        ;;
+    esac
+  done
+  $CBFSTOOL $ROMFILE add-payload -f $filename -n $targetname -c $compressflag
+}
+
+function cbfs_remove {
+  filename=${1:?no filename}
+  $CBFSTOOL $ROMFILE remove -n $filename
+}
+
+function cbfs_add_int {
+  $CBFSTOOL $ROMFILE add-int -i $1 -n $2
+}
+
+function cbfs_print {
+  $CBFSTOOL $ROMFILE print
+}

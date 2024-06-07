@@ -1,0 +1,10 @@
+*.swp
+*.pyc
+.DS_Store
+/coreboot/util/crossgcc/xgcc
+/coreboot/.config*
+/coreboot/.xcompile
+/coreboot/build
+/seabios/.config*
+/seabios/out
+/out/
