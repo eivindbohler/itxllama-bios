@@ -104,32 +104,32 @@ void llama_boot(llama_bios_settings *lbs) {
   }
 
   // First, initialize the CS4237 with external FM enabled
-  // cs4237_hostload(lbs, 1);
-  // cs4237_slam_configuration(lbs);
-  // lbs->cs4237_ext_fm_present = cs4237_test_opl3(lbs);
-  // if (lbs->cs4237_ext_fm.value == 0 || lbs->cs4237_ext_fm_present == 0) {
-  //  // If the user has disabled external FM or it's not present,
-  //  // initialize the CS4237 with internal FM enabled
-  //  cs4237_hostload(lbs, 0);
-  //  cs4237_slam_configuration(lbs);
-  //}
-  // cs4237_setup_mixer(lbs);
-  // if (lbs->cs4237_digital.value) {
-  //  cs4237_enable_digital_output(lbs);
-  //}
+  cs4237_hostload(lbs, 1);
+  cs4237_slam_configuration(lbs);
+  lbs->cs4237_ext_fm_present = cs4237_test_opl3(lbs);
+  if (lbs->cs4237_ext_fm.value == 0 || lbs->cs4237_ext_fm_present == 0) {
+    // If the user has disabled external FM or it's not present,
+    // initialize the CS4237 with internal FM enabled
+    cs4237_hostload(lbs, 0);
+    cs4237_slam_configuration(lbs);
+  }
+  cs4237_setup_mixer(lbs);
+  if (lbs->cs4237_digital.value) {
+    cs4237_enable_digital_output(lbs);
+  }
 
-  // printf("\n\nCrystal CS4237 Initialized\nFM Synthesizer:        ");
-  // if (lbs->cs4237_ext_fm.value && lbs->cs4237_ext_fm_present) {
-  //   printf("OPL3 module");
-  // } else {
-  //   printf("Internal");
-  // }
-  // printf("\nDigital S/PDIF output: ");
-  // if (lbs->cs4237_digital.value) {
-  //   printf("Enabled");
-  // } else {
-  //   printf("Disabled");
-  // }
+  printf("\n\nCrystal CS4237 Initialized\nFM Synthesizer:        ");
+  if (lbs->cs4237_ext_fm.value && lbs->cs4237_ext_fm_present) {
+    printf("OPL3 module");
+  } else {
+    printf("Internal");
+  }
+  printf("\nDigital S/PDIF output: ");
+  if (lbs->cs4237_digital.value) {
+    printf("Enabled");
+  } else {
+    printf("Disabled");
+  }
 
   printf("\n\nEMC2303 Fan Controller ");
   if (llama_get_emc_product_id_reg() == 0x35) {
