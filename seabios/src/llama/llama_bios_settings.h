@@ -20,14 +20,6 @@ struct llama_bios_settings_s {
   // 0 = no, 1 = yes (means the settings have been saved to SPI flash)
   llama_bios_setting_entry_u8 initialized;
 
-  /* Index = CPU frequency / DRAM frequency
-   * 0 =  60/100
-   * 1 = 100/200
-   * 2 = 200/200
-   * 3 = 300/300
-   * 4 = 400/400
-   * 5 = 466/350
-   * 6 = 500/375 */
   llama_bios_setting_entry_u8 cpu_freq_index;
   llama_bios_setting_entry_u8 l1_cache;              // 0 = no, 1 = yes
   llama_bios_setting_entry_u8 l2_cache;              // 0 = no, 1 = yes

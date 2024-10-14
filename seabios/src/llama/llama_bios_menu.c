@@ -47,13 +47,12 @@ main_menu_entry main_menu_entries[NUM_MAIN_MENU_ENTRIES] = {
         STRING_DESC_CPU_FREQ_3,
         6,
         { // change entries
-          //{ "60 MHz",  0 }, // weird keyboard issues
+          { "60 MHz",  0 },
           { "100 MHz", 1 },
           { "200 MHz", 2 },
           { "300 MHz", 3 },
-          { "400 MHz", 4 },
-          { "466 MHz", 5 },
-          { "500 MHz", 6 }
+          { "466 MHz", 4 },
+          { "500 MHz", 5 }
         },
         handler_get_cpu_freq_index,
         handler_set_cpu_freq_index,
